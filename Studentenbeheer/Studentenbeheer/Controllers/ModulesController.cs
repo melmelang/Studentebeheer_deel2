@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Studentenbeheer.Data;
 using Studentenbeheer.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Studentenbeheer.Controllers
 {
+    [Authorize]
     public class ModulesController : Controller
     {
         private readonly StudentenbeheerContext _context;
