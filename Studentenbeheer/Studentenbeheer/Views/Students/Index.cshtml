@@ -1,0 +1,65 @@
+﻿@model StudentIndexViewModel;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<p>
+    <form asp-action="Index" asp-controller="Students" methot="get">
+        <label for="searchFieldName">Naam: </label>
+        <input type="text" name="searchFieldName" />
+        <label for="gender">Geslacht: </label>
+        <select name="searchGender" asp-items="@ViewBag.genderId">
+            <option value="">all</option>
+        </select>
+        <input type="submit" value="Filter" />
+    </form>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-orderBy="@ViewBag.VoornaamField">@Html.DisplayNameFor(model => model.FilteredStudent[0].Voornaam)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-orderBy="@ViewBag.AchternaamField">@Html.DisplayNameFor(model => model.FilteredStudent[0].Achternaam)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-orderBy="@ViewBag.GeboortedatumField">@Html.DisplayNameFor(model => model.FilteredStudent[0].Geboortedatum)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FilteredStudent[0].Geslacht)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var student in Model.FilteredStudent) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => student.Voornaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Achternaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Geboortedatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Geslacht.Name)
+            </td>
+            <td>
+                <a asp-controller="Inschrijvingens" asp-action="Create" asp-route-id="@student.Id" asp-route-wich="2">Inschrijven</a> |
+                <a asp-action="Edit" asp-route-id="@student.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@student.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@student.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
