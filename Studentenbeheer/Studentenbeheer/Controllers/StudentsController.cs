@@ -11,12 +11,12 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Studentenbeheer.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class StudentsController : Controller
     {
-        private readonly StudentenbeheerContext _context;
+        private readonly AppDataContext _context;
 
-        public StudentsController(StudentenbeheerContext context)
+        public StudentsController(AppDataContext context)
         {
             _context = context;
         }

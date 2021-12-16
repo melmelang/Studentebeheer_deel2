@@ -24,17 +24,17 @@ namespace Studentenbeheer.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<StudentenbeheerUser> _signInManager;
-        private readonly UserManager<StudentenbeheerUser> _userManager;
-        private readonly IUserStore<StudentenbeheerUser> _userStore;
-        private readonly IUserEmailStore<StudentenbeheerUser> _emailStore;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IUserStore<AppUser> _userStore;
+        private readonly IUserEmailStore<AppUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<StudentenbeheerUser> userManager,
-            IUserStore<StudentenbeheerUser> userStore,
-            SignInManager<StudentenbeheerUser> signInManager,
+            UserManager<AppUser> userManager,
+            IUserStore<AppUser> userStore,
+            SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -71,6 +71,12 @@ namespace Studentenbeheer.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Voornaam")]
+            public string Voornaam { get; set; }
+            [Required]
+            [Display(Name = "Achternaam")]
+            public string Achternaam { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -114,8 +120,10 @@ namespace Studentenbeheer.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.Voornaam = Input.Voornaam;
+                user.Achternaam = Input.Achternaam;
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.Voornaam + "_" + Input.Achternaam, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
@@ -155,27 +163,27 @@ namespace Studentenbeheer.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private StudentenbeheerUser CreateUser()
+        private AppUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<StudentenbeheerUser>();
+                return Activator.CreateInstance<AppUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(StudentenbeheerUser)}'. " +
-                    $"Ensure that '{nameof(StudentenbeheerUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(AppUser)}'. " +
+                    $"Ensure that '{nameof(AppUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<StudentenbeheerUser> GetEmailStore()
+        private IUserEmailStore<AppUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<StudentenbeheerUser>)_userStore;
+            return (IUserEmailStore<AppUser>)_userStore;
         }
     }
 }

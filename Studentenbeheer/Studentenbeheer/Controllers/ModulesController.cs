@@ -14,9 +14,9 @@ namespace Studentenbeheer.Controllers
     [Authorize]
     public class ModulesController : Controller
     {
-        private readonly StudentenbeheerContext _context;
+        private readonly AppDataContext _context;
 
-        public ModulesController(StudentenbeheerContext context)
+        public ModulesController(AppDataContext context)
         {
             _context = context;
         }
