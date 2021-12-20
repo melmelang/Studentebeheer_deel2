@@ -810,3 +810,4 @@ C:\Users\angeli melvin\Documents\GitHub\Studentebeheer_deel2\Studentenbeheer\Stu
 C:\Users\angeli melvin\Documents\GitHub\Studentebeheer_deel2\Studentenbeheer\Studentenbeheer\bin\Debug\net6.0\MimeKit.dll
 C:\Users\angeli melvin\Documents\GitHub\Studentebeheer_deel2\Studentenbeheer\Studentenbeheer\bin\Debug\net6.0\NETCore.MailKit.dll
 C:\Users\angeli melvin\Documents\GitHub\Studentebeheer_deel2\Studentenbeheer\Studentenbeheer\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\angeli melvin\Documents\GitHub\Studentebeheer_deel2\Studentenbeheer\Studentenbeheer\obj\Debug\net6.0\Studentenbeheer.csproj.AssemblyReference.cache

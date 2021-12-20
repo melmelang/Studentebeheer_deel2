@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Studentenbeheer.Controllers
 {
-    [Authorize]
+    [Authorize (Roles = "Guest")]
     public class StudentsController : Controller
     {
         private readonly AppDataContext _context;
@@ -99,6 +99,7 @@ namespace Studentenbeheer.Controllers
         // GET: Students/Create
         public IActionResult Create()
         {
+            string currentUserId = User.Identity.Name;
             ViewData["GeslachtId"] = new SelectList(_context.Gender, "ID", "Name");
             return View();
         }
