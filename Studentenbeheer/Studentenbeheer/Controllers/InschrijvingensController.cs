@@ -12,13 +12,11 @@ using Microsoft.AspNetCore.Authorization;
 namespace Studentenbeheer.Controllers
 {
     [Authorize]
-    public class InschrijvingensController : Controller
+    public class InschrijvingensController : AppController
     {
-        private readonly AppDataContext _context;
 
-        public InschrijvingensController(AppDataContext context)
+        public InschrijvingensController(AppDataContext context, IHttpContextAccessor httpContextAccessor, ILogger<AppController> logger) : base(context, httpContextAccessor, logger)
         {
-            _context = context;
         }
 
         // GET: Inschrijvingens

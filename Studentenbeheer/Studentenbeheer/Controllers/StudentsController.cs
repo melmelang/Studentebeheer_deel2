@@ -8,23 +8,33 @@ using Microsoft.EntityFrameworkCore;
 using Studentenbeheer.Data;
 using Studentenbeheer.Models;
 using Microsoft.AspNetCore.Authorization;
+using Studentenbeheer.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 
 namespace Studentenbeheer.Controllers
 {
     [Authorize (Roles = "Guest")]
-    public class StudentsController : Controller
+    public class StudentsController : AppController
     {
-        private readonly AppDataContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public StudentsController(AppDataContext context)
+        public StudentsController(UserManager<AppUser> userManager, 
+                                    AppDataContext context, 
+                                    IHttpContextAccessor httpContextAccessor, 
+                                    ILogger<AppController> logger) : base(context, httpContextAccessor, logger)
         {
-            _context = context;
+            _userManager = userManager;
         }
 
         // GET: Students
         public async Task<IActionResult> Index(string searchFieldName, char searchGender, string orderBy)
         {
             var students = from s in _context.Student where s.Deleted > DateTime.Now orderby s.Voornaam select s;
+            var user = _context.Users.FirstOrDefault(e => e.UserName == User.Identity.Name);
+            var roles = _context.UserRoles.Where(r => r.UserId == user.Id);
+            var idertityroles = User.IsInRole("Guest");
 
             if (searchGender != 0)
                 students = from s in _context.Student
@@ -113,7 +123,18 @@ namespace Studentenbeheer.Controllers
         {
             if (ModelState.IsValid)
             {
+                //student deel
                 _context.Add(student);
+
+                //user deel
+                var user = Activator.CreateInstance<AppUser>();
+                user.Voornaam = student.Voornaam;
+                user.Achternaam = student.Achternaam;
+                user.UserName = student.Voornaam + "." + student.Achternaam;
+                user.Email = student.Voornaam + "." + student.Achternaam + "@ehb.be";
+                user.EmailConfirmed = true;
+                await _userManager.CreateAsync(user, student.Voornaam + "." + student.Achternaam + "EHB1");
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

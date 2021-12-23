@@ -6,16 +6,20 @@ using Studentenbeheer.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Studentenbeheer.Services;
 using NETCore.MailKit.Infrastructure.Internal;
+using Studentenbeheer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AppDataContextConnection");
 builder.Services.AddDbContext<AppDataContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<AppDataContext>();builder.Services.AddDbContext<AppDataContext>(options =>
+builder.Services.AddDefaultIdentity<AppUser>((IdentityOptions options) => options.SignIn.RequireConfirmedAccount = true)
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<AppDataContext>();
+builder.Services.AddDbContext<AppDataContext>(options =>
     options.UseSqlServer(connectionString));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -38,19 +42,19 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = false;
 });
 
-builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
-builder.Services.Configure<MailKitOptions>(options =>
-{
-    options.Server = builder.Configuration["ExternalProviders:MailKit:SMTP:Address"];
-    options.Port = Convert.ToInt32(builder.Configuration["ExternalProviders:MailKit:SMTP:Port"]);
-    options.Account = builder.Configuration["ExternalProviders:MailKit:SMTP:Account"];
-    options.Password = builder.Configuration["ExternalProviders:MailKit:SMTP:Password"];
-    options.SenderEmail = builder.Configuration["ExternalProviders:MailKit:SMTP:SenderEmail"];
-    options.SenderName = builder.Configuration["ExternalProviders:MailKit:SMTP:SenderName"];
+//builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
+//builder.Services.Configure<MailKitOptions>(options =>
+//{
+//    options.Server = builder.Configuration["ExternalProviders:MailKit:SMTP:Address"];
+//    options.Port = Convert.ToInt32(builder.Configuration["ExternalProviders:MailKit:SMTP:Port"]);
+//    options.Account = builder.Configuration["ExternalProviders:MailKit:SMTP:Account"];
+//    options.Password = builder.Configuration["ExternalProviders:MailKit:SMTP:Password"];
+//    options.SenderEmail = builder.Configuration["ExternalProviders:MailKit:SMTP:SenderEmail"];
+//    options.SenderName = builder.Configuration["ExternalProviders:MailKit:SMTP:SenderName"];
 
-    // Set it to TRUE to enable ssl or tls, FALSE otherwise
-    options.Security = false;  // true zet ssl or tls aan
-});
+//    // Set it to TRUE to enable ssl or tls, FALSE otherwise
+//    options.Security = false;  // true zet ssl or tls aan
+//});
 
 var app = builder.Build();
 
@@ -81,5 +85,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.MapRazorPages();
+app.UseMiddleware<SessionUser>();
 
 app.Run();

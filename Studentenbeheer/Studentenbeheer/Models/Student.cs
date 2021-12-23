@@ -22,6 +22,11 @@ namespace Studentenbeheer.Models
         [ForeignKey("Gender")]
         public char GeslachtId { get; set; }
         public Gender? Geslacht { get; set; }
+
+        [ForeignKey("User")]
+        public string userId { get; set; }
+        public Users? User;
+
     }
 
     public class StudentIndexViewModel

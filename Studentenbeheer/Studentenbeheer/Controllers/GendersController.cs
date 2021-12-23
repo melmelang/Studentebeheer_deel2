@@ -10,13 +10,11 @@ using Studentenbeheer.Models;
 
 namespace Studentenbeheer.Controllers
 {
-    public class GendersController : Controller
+    public class GendersController : AppController
     {
-        private readonly AppDataContext _context;
 
-        public GendersController(AppDataContext context)
+        public GendersController(AppDataContext context, IHttpContextAccessor httpContextAccessor, ILogger<AppController> logger) : base(context, httpContextAccessor, logger)
         {
-            _context = context;
         }
 
         // GET: Genders
