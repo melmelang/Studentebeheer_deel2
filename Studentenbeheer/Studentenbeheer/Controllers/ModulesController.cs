@@ -19,7 +19,6 @@ namespace Studentenbeheer.Controllers
         {
         }
 
-        [Authorize(Roles = "Student")]
         // GET: Modules
         public async Task<IActionResult> Index()
         {
@@ -28,7 +27,6 @@ namespace Studentenbeheer.Controllers
             return View(await modules.ToListAsync());
         }
 
-        [Authorize(Roles = "Student")]
         // GET: Modules/Details/5
         public async Task<IActionResult> Details(int? id)
         {

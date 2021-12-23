@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Studentenbeheer.Controllers
 {
-    [Authorize (Roles = "Beheerder")]
+    [Authorize]
     public class InschrijvingensController : AppController
     {
 
@@ -46,6 +46,7 @@ namespace Studentenbeheer.Controllers
             return View(inschrijvingen);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // GET: Inschrijvingens/Create
         public IActionResult Create(int? id, int? wich)
         {
@@ -67,6 +68,7 @@ namespace Studentenbeheer.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Beheerder")]
         // POST: Inschrijvingens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -85,6 +87,7 @@ namespace Studentenbeheer.Controllers
             return View(inschrijvingen);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // GET: Inschrijvingens/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -103,6 +106,7 @@ namespace Studentenbeheer.Controllers
             return View(inschrijvingen);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // POST: Inschrijvingens/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -140,6 +144,7 @@ namespace Studentenbeheer.Controllers
             return View(inschrijvingen);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // GET: Inschrijvingens/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -160,6 +165,7 @@ namespace Studentenbeheer.Controllers
             return View(inschrijvingen);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // POST: Inschrijvingens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
