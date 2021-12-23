@@ -15,7 +15,7 @@ using System.Text;
 
 namespace Studentenbeheer.Controllers
 {
-    [Authorize (Roles = "Guest")]
+    [Authorize (Roles = "Beheerder")]
     public class StudentsController : AppController
     {
         private readonly UserManager<AppUser> _userManager;
@@ -123,9 +123,6 @@ namespace Studentenbeheer.Controllers
         {
             if (ModelState.IsValid)
             {
-                //student deel
-                _context.Add(student);
-
                 //user deel
                 var user = Activator.CreateInstance<AppUser>();
                 user.Voornaam = student.Voornaam;
@@ -135,7 +132,13 @@ namespace Studentenbeheer.Controllers
                 user.EmailConfirmed = true;
                 await _userManager.CreateAsync(user, student.Voornaam + "." + student.Achternaam + "EHB1");
 
+                //student deel
+                student.UserId = user.Id;
+                _context.Add(student);
+
                 await _context.SaveChangesAsync();
+
+                await _userManager.AddToRoleAsync(user, "Student");
                 return RedirectToAction(nameof(Index));
             }
             ViewData["GeslachtId"] = new SelectList(_context.Gender, "ID", "Name", student.GeslachtId);

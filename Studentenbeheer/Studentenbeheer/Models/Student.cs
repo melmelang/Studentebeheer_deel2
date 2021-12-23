@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Studentenbeheer.Areas.Identity.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,8 +25,8 @@ namespace Studentenbeheer.Models
         public Gender? Geslacht { get; set; }
 
         [ForeignKey("User")]
-        public string userId { get; set; }
-        public Users? User;
+        public string? UserId { get; set; }
+        public AppUser? User { get; set; }
 
     }
 

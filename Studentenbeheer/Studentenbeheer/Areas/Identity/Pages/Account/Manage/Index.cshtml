@@ -15,16 +15,29 @@
                 <input asp-for="Username" class="form-control" disabled />
                 <label asp-for="Username" class="form-label"></label>
             </div>
-            <div class="form-floating">
-                <input asp-for="Input.Voornaam" class="form-control" />
-                <label asp-for="Input.Voornaam" class="form-label"></label>
-                <span asp-validation-for="Input.Voornaam" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.Achternaam" class="form-control" />
-                <label asp-for="Input.Achternaam" class="form-label"></label>
-                <span asp-validation-for="Input.Achternaam" class="text-danger"></span>
-            </div>
+            @if (User.IsInRole("Student")) {
+                <div class="form-floating">
+                    <input asp-for="Input.Voornaam" class="form-control" disabled />
+                    <label asp-for="Input.Voornaam" class="form-label"></label>
+                    <span asp-validation-for="Input.Voornaam" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.Achternaam" class="form-control" disabled />
+                    <label asp-for="Input.Achternaam" class="form-label"></label>
+                    <span asp-validation-for="Input.Achternaam" class="text-danger"></span>
+                </div>
+            } else {
+                <div class="form-floating">
+                    <input asp-for="Input.Voornaam" class="form-control" />
+                    <label asp-for="Input.Voornaam" class="form-label"></label>
+                    <span asp-validation-for="Input.Voornaam" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.Achternaam" class="form-control" />
+                    <label asp-for="Input.Achternaam" class="form-label"></label>
+                    <span asp-validation-for="Input.Achternaam" class="text-danger"></span>
+                </div>
+            }
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>

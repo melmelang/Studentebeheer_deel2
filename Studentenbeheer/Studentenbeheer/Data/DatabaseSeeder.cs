@@ -28,8 +28,9 @@ namespace Studentenbeheer.Data
                     userManager.CreateAsync(user, "V@c@nc3s");
 
                     context.Roles.AddRange(
-                        new IdentityRole { Id = "Guest", Name = "Guest", NormalizedName = "guest"},
-                        new IdentityRole { Id = "Admin", Name = "Admin", NormalizedName = "admin" }
+                        new IdentityRole { Id = "Beheerder", Name = "Beheerder", NormalizedName = "beheerder" },
+                        new IdentityRole { Id = "Docent", Name = "Docent", NormalizedName = "docent" },
+                        new IdentityRole { Id = "Student", Name = "Student", NormalizedName = "student"}
                         );
                     context.SaveChanges();
                 }
@@ -70,6 +71,7 @@ namespace Studentenbeheer.Data
                             Achternaam = "DeBast",
                             Geboortedatum = DateTime.Now,
                             GeslachtId = 'V',
+                            UserId = user.Id,
                             Deleted = DateTime.MaxValue
                         },
 
@@ -79,6 +81,7 @@ namespace Studentenbeheer.Data
                             Achternaam = "Couck",
                             Geboortedatum = DateTime.Now,
                             GeslachtId = 'M',
+                            UserId = user.Id,
                             Deleted = DateTime.MaxValue
                         },
 
@@ -88,6 +91,7 @@ namespace Studentenbeheer.Data
                             Achternaam = "Angeli",
                             Geboortedatum = DateTime.Now,
                             GeslachtId = '-',
+                            UserId = user.Id,
                             Deleted = DateTime.MaxValue
                         },
 
@@ -97,6 +101,7 @@ namespace Studentenbeheer.Data
                             Achternaam = "-",
                             Geboortedatum = DateTime.Now,
                             GeslachtId = '-',
+                            UserId = user.Id,
                             Deleted = DateTime.Now
                         }
 
@@ -161,8 +166,9 @@ namespace Studentenbeheer.Data
                 if (user != null)
                 {
                     context.UserRoles.AddRange(
-                        new IdentityUserRole<string> { RoleId = "Admin", UserId = user.Id},
-                        new IdentityUserRole<string> { RoleId = "Guest", UserId = user.Id}
+                        new IdentityUserRole<string> { RoleId = "Beheerder", UserId = user.Id},
+                        new IdentityUserRole<string> { RoleId = "Docent", UserId = user.Id},
+                        new IdentityUserRole<string> { RoleId = "Student", UserId = user.Id }
                         );
                     context.SaveChanges();
                 }

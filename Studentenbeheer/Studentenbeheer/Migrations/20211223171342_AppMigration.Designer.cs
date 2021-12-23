@@ -12,14 +12,14 @@ using Studentenbeheer.Data;
 namespace Studentenbeheer.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20211212155731_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20211223171342_AppMigration")]
+    partial class AppMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -325,6 +325,9 @@ namespace Studentenbeheer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Voornaam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -332,6 +335,8 @@ namespace Studentenbeheer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("GeslachtId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Student");
                 });
@@ -414,7 +419,13 @@ namespace Studentenbeheer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Studentenbeheer.Areas.Identity.Data.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Geslacht");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

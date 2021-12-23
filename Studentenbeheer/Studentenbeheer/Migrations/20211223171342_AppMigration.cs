@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Studentenbeheer.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class AppMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -193,11 +193,17 @@ namespace Studentenbeheer.Migrations
                     Achternaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Geboortedatum = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Deleted = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    GeslachtId = table.Column<string>(type: "nvarchar(1)", nullable: false)
+                    GeslachtId = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Student", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Student_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Student_Gender_GeslachtId",
                         column: x => x.GeslachtId,
@@ -288,6 +294,11 @@ namespace Studentenbeheer.Migrations
                 name: "IX_Student_GeslachtId",
                 table: "Student",
                 column: "GeslachtId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Student_UserId",
+                table: "Student",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -314,13 +325,13 @@ namespace Studentenbeheer.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Module");
 
             migrationBuilder.DropTable(
                 name: "Student");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Gender");

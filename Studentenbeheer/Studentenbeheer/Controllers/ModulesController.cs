@@ -19,6 +19,7 @@ namespace Studentenbeheer.Controllers
         {
         }
 
+        [Authorize(Roles = "Student")]
         // GET: Modules
         public async Task<IActionResult> Index()
         {
@@ -27,6 +28,7 @@ namespace Studentenbeheer.Controllers
             return View(await modules.ToListAsync());
         }
 
+        [Authorize(Roles = "Student")]
         // GET: Modules/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,12 +47,14 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // GET: Modules/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Beheerder")]
         // POST: Modules/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -67,6 +71,7 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // GET: Modules/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -83,6 +88,7 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // POST: Modules/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -118,6 +124,7 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // GET: Modules/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -136,6 +143,7 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // POST: Modules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

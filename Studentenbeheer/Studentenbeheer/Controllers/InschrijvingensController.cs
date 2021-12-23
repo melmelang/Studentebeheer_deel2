@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Studentenbeheer.Controllers
 {
-    [Authorize]
+    [Authorize (Roles = "Beheerder")]
     public class InschrijvingensController : AppController
     {
 
