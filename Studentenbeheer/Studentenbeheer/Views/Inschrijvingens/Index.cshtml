@@ -32,7 +32,6 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-            if (item.Student.Achternaam == "Couck") {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Student.Achternaam)
@@ -55,7 +54,6 @@
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
             </tr>
-        }
 }
     </tbody>
 </table>

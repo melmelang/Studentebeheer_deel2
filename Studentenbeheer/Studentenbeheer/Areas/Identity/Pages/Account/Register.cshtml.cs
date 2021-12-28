@@ -2,23 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 using Studentenbeheer.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace Studentenbeheer.Areas.Identity.Pages.Account
 {
@@ -123,7 +116,7 @@ namespace Studentenbeheer.Areas.Identity.Pages.Account
                 user.Voornaam = Input.Voornaam;
                 user.Achternaam = Input.Achternaam;
 
-                await _userStore.SetUserNameAsync(user, Input.Voornaam + "_" + Input.Achternaam, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.Voornaam + "." + Input.Achternaam, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

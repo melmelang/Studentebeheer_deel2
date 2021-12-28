@@ -9,7 +9,7 @@ namespace Studentenbeheer.Services
 {
     public class MailKitEmailSender : IEmailSender
     {
-        
+
         public MailKitEmailSender(IOptions<MailKitOptions> options)
         {
             this.Options = options.Value;

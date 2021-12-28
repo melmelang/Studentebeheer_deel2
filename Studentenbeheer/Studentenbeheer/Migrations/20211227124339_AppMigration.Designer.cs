@@ -12,7 +12,7 @@ using Studentenbeheer.Data;
 namespace Studentenbeheer.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20211223171342_AppMigration")]
+    [Migration("20211227124339_AppMigration")]
     partial class AppMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -232,6 +232,44 @@ namespace Studentenbeheer.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Studentenbeheer.Models.Docent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Achternaam")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Geboortedatum")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GeslachtId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Voornaam")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeslachtId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Docent");
+                });
+
             modelBuilder.Entity("Studentenbeheer.Models.Gender", b =>
                 {
                     b.Property<string>("ID")
@@ -390,6 +428,23 @@ namespace Studentenbeheer.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Studentenbeheer.Models.Docent", b =>
+                {
+                    b.HasOne("Studentenbeheer.Models.Gender", "Geslacht")
+                        .WithMany()
+                        .HasForeignKey("GeslachtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Studentenbeheer.Areas.Identity.Data.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Geslacht");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Studentenbeheer.Models.Inschrijvingen", b =>

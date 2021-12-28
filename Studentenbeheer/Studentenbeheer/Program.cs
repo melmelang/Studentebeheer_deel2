@@ -1,11 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Studentenbeheer.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Studentenbeheer.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Studentenbeheer.Services;
-using NETCore.MailKit.Infrastructure.Internal;
+using Studentenbeheer.Data;
 using Studentenbeheer.Models;
 
 var builder = WebApplication.CreateBuilder(args);

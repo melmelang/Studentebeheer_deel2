@@ -13,6 +13,10 @@ namespace Studentenbeheer.Data
                 serviceProvider.GetRequiredService<DbContextOptions<AppDataContext>>()))
             {
                 AppUser user = null;
+                AppUser user2 = null;
+                AppUser user3 = null;
+                AppUser user4 = null;
+                AppUser user5 = null;
                 context.Database.EnsureCreated();
 
                 if (!context.Users.Any())
@@ -21,16 +25,52 @@ namespace Studentenbeheer.Data
                     {
                         Voornaam = "Melvin",
                         Achternaam = "Angeli",
-                        UserName = "Melvin_Angeli",
+                        UserName = "Melvin.Angeli",
+                        Email = "Angeli.melvin@hotmail.com",
+                        EmailConfirmed = true,
+                    };
+                    user2 = new AppUser
+                    {
+                        Voornaam = "Antoine",
+                        Achternaam = "Couck",
+                        UserName = "Antoine.Couck",
+                        Email = "Angeli.melvin@hotmail.com",
+                        EmailConfirmed = true,
+                    };
+                    user3 = new AppUser
+                    {
+                        Voornaam = "Ine",
+                        Achternaam = "DeBast",
+                        UserName = "Ine.DeBast",
+                        Email = "Angeli.melvin@hotmail.com",
+                        EmailConfirmed = true,
+                    };
+                    user4 = new AppUser
+                    {
+                        Voornaam = "Tilly",
+                        Achternaam = "VanLaethem",
+                        UserName = "Tilly.VanLaethem",
+                        Email = "Angeli.melvin@hotmail.com",
+                        EmailConfirmed = true,
+                    };
+                    user5 = new AppUser
+                    {
+                        Voornaam = "Brian",
+                        Achternaam = "Angeli",
+                        UserName = "Brian.Angeli",
                         Email = "Angeli.melvin@hotmail.com",
                         EmailConfirmed = true,
                     };
                     userManager.CreateAsync(user, "V@c@nc3s");
+                    userManager.CreateAsync(user2, "V@c@nc3s");
+                    userManager.CreateAsync(user3, "V@c@nc3s");
+                    userManager.CreateAsync(user4, "V@c@nc3s");
+                    userManager.CreateAsync(user5, "V@c@nc3s");
 
                     context.Roles.AddRange(
                         new IdentityRole { Id = "Beheerder", Name = "Beheerder", NormalizedName = "beheerder" },
                         new IdentityRole { Id = "Docent", Name = "Docent", NormalizedName = "docent" },
-                        new IdentityRole { Id = "Student", Name = "Student", NormalizedName = "student"}
+                        new IdentityRole { Id = "Student", Name = "Student", NormalizedName = "student" }
                         );
                     context.SaveChanges();
                 }
@@ -67,42 +107,50 @@ namespace Studentenbeheer.Data
 
                         new Student
                         {
-                            Voornaam = "Ine",
-                            Achternaam = "DeBast",
+                            Voornaam = user2.Voornaam,
+                            Achternaam = user2.Achternaam,
                             Geboortedatum = DateTime.Now,
                             GeslachtId = 'V',
-                            UserId = user.Id,
+                            UserId = user2.Id,
                             Deleted = DateTime.MaxValue
                         },
 
                         new Student
                         {
-                            Voornaam = "Antoine",
-                            Achternaam = "Couck",
+                            Voornaam = user3.Voornaam,
+                            Achternaam = user3.Achternaam,
                             Geboortedatum = DateTime.Now,
                             GeslachtId = 'M',
-                            UserId = user.Id,
+                            UserId = user3.Id,
+                            Deleted = DateTime.MaxValue
+                        }
+
+                    );
+                    context.SaveChanges();
+                }
+
+                if (!context.Docent.Any())
+                {
+                    context.Docent.AddRange(
+
+                        new Docent
+                        {
+                            Voornaam = user4.Voornaam,
+                            Achternaam = user4.Achternaam,
+                            Geboortedatum = DateTime.Now,
+                            GeslachtId = 'V',
+                            UserId = user4.Id,
                             Deleted = DateTime.MaxValue
                         },
 
-                        new Student
+                        new Docent
                         {
-                            Voornaam = "Melvin",
-                            Achternaam = "Angeli",
+                            Voornaam = user5.Voornaam,
+                            Achternaam = user5.Achternaam,
                             Geboortedatum = DateTime.Now,
-                            GeslachtId = '-',
-                            UserId = user.Id,
+                            GeslachtId = 'M',
+                            UserId = user5.Id,
                             Deleted = DateTime.MaxValue
-                        },
-
-                        new Student
-                        {
-                            Voornaam = "-",
-                            Achternaam = "-",
-                            Geboortedatum = DateTime.Now,
-                            GeslachtId = '-',
-                            UserId = user.Id,
-                            Deleted = DateTime.Now
                         }
 
                     );
@@ -163,12 +211,36 @@ namespace Studentenbeheer.Data
                     context.SaveChanges();
                 }
 
+                if (!context.DocentModule.Any())
+                {
+                    context.DocentModule.AddRange(
+                        new DocentModule
+                        {
+                            DocentId = 1,
+                            ModuleId = 1
+                        },
+                        new DocentModule
+                        {
+                            DocentId = 2,
+                            ModuleId = 2
+                        },
+                        new DocentModule
+                        {
+                            DocentId = 2,
+                            ModuleId = 2
+                        }
+                        );
+                    context.SaveChanges();
+                }
+
                 if (user != null)
                 {
                     context.UserRoles.AddRange(
-                        new IdentityUserRole<string> { RoleId = "Beheerder", UserId = user.Id},
-                        new IdentityUserRole<string> { RoleId = "Docent", UserId = user.Id},
-                        new IdentityUserRole<string> { RoleId = "Student", UserId = user.Id }
+                        new IdentityUserRole<string> { RoleId = "Beheerder", UserId = user.Id },
+                        new IdentityUserRole<string> { RoleId = "Docent", UserId = user4.Id },
+                        new IdentityUserRole<string> { RoleId = "Docent", UserId = user5.Id },
+                        new IdentityUserRole<string> { RoleId = "Student", UserId = user2.Id },
+                        new IdentityUserRole<string> { RoleId = "Student", UserId = user3.Id }
                         );
                     context.SaveChanges();
                 }

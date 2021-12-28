@@ -31,17 +31,10 @@
                 @Html.DisplayFor(modelItem => item.Omschrijving)
             </td>
             <td>
-                @if(User.IsInRole("Docent") || User.IsInRole("Beheerder")){
-                    <a asp-controller="Inschrijvingens" asp-action="Create" asp-route-id="@item.Id" asp-route-wich="1">Inschrijven </a>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit </a> 
-                }
-
-                <a asp-action="Details" asp-route-id="@item.Id">Details </a> 
-                
-                @if (User.IsInRole("Docent") || User.IsInRole("Beheerder"))
-                {
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                }
+                <a asp-controller="Inschrijvingens" asp-action="Create" asp-route-id="@item.Id" asp-route-wich="1">Inschrijven </a>|
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit </a>|
+                <a asp-action="Details" asp-route-id="@item.Id">Details </a>|
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

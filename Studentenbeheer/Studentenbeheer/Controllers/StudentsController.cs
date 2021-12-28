@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Studentenbeheer.Areas.Identity.Data;
 using Studentenbeheer.Data;
 using Studentenbeheer.Models;
-using Microsoft.AspNetCore.Authorization;
-using Studentenbeheer.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebUtilities;
-using System.Text;
 
 namespace Studentenbeheer.Controllers
 {
-    [Authorize (Roles = "Beheerder")]
+    [Authorize(Roles = "Beheerder,Docent")]
     public class StudentsController : AppController
     {
         private readonly UserManager<AppUser> _userManager;
 
-        public StudentsController(UserManager<AppUser> userManager, 
-                                    AppDataContext context, 
-                                    IHttpContextAccessor httpContextAccessor, 
+        public StudentsController(UserManager<AppUser> userManager,
+                                    AppDataContext context,
+                                    IHttpContextAccessor httpContextAccessor,
                                     ILogger<AppController> logger) : base(context, httpContextAccessor, logger)
         {
             _userManager = userManager;
@@ -106,10 +100,10 @@ namespace Studentenbeheer.Controllers
             return View(student);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // GET: Students/Create
         public IActionResult Create()
         {
-            string currentUserId = User.Identity.Name;
             ViewData["GeslachtId"] = new SelectList(_context.Gender, "ID", "Name");
             return View();
         }
@@ -145,6 +139,7 @@ namespace Studentenbeheer.Controllers
             return View(student);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // GET: Students/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -162,6 +157,7 @@ namespace Studentenbeheer.Controllers
             return View(student);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // POST: Students/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -198,6 +194,7 @@ namespace Studentenbeheer.Controllers
             return View(student);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // GET: Students/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -217,6 +214,7 @@ namespace Studentenbeheer.Controllers
             return View(student);
         }
 
+        [Authorize(Roles = "Beheerder")]
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

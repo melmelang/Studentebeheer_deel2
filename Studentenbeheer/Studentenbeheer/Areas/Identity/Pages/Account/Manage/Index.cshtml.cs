@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Studentenbeheer.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace Studentenbeheer.Areas.Identity.Pages.Account.Manage
 {
@@ -62,7 +59,7 @@ namespace Studentenbeheer.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(AppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            
+
 
             Username = userName;
 

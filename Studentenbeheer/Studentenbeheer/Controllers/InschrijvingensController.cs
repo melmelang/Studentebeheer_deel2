@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Studentenbeheer.Data;
 using Studentenbeheer.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Studentenbeheer.Controllers
 {
@@ -23,6 +19,26 @@ namespace Studentenbeheer.Controllers
         public async Task<IActionResult> Index()
         {
             var studentenbeheerContext = _context.Inschrijvingen.Include(i => i.Module).Include(i => i.Student);
+            if (User.IsInRole("Beheerder"))
+            {
+                return View(await studentenbeheerContext.ToListAsync());
+            }
+            if (User.IsInRole("Docent"))
+            {
+                var moduleId = _context.DocentModule.Include(dm => dm.Module).Include(dm => dm.Docent)
+                    .Where(dm => dm.Docent.UserId == _user.Id)
+                    .Select(dm => dm.Module.Id).ToList();
+                var studentenbeheerContext2 = _context.Inschrijvingen.Include(i => i.Module).Include(i => i.Student)
+                    .Where(i => moduleId.Contains(i.Module.Id));
+                return View(await studentenbeheerContext2.ToListAsync());
+            }
+            if (User.IsInRole("Student"))
+            {
+                var studentenbeheerContext2 = _context.Inschrijvingen.Include(i => i.Module).Include(i => i.Student)
+                    .Where(i => i.Student.UserId == _user.Id);
+                return View(await studentenbeheerContext2.ToListAsync());
+
+            }
             return View(await studentenbeheerContext.ToListAsync());
         }
 

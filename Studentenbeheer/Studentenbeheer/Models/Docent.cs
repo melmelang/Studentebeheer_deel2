@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Studentenbeheer.Areas.Identity.Data;
+﻿using Studentenbeheer.Areas.Identity.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Studentenbeheer.Models
 {
-    [Authorize(Roles = "Admin")]
-    public class Student
+    public class Docent
     {
         public int Id { get; set; }
         [Required]
@@ -20,21 +17,13 @@ namespace Studentenbeheer.Models
         public DateTime Geboortedatum { get; set; }
         public DateTime? Deleted { get; set; } = DateTime.MaxValue;
 
-        [ForeignKey("Gender")]
+        [ForeignKey("GenderId")]
         public char GeslachtId { get; set; }
         public Gender? Geslacht { get; set; }
 
-        [ForeignKey("User")]
+        [ForeignKey("UserId")]
         public string? UserId { get; set; }
         public AppUser? User { get; set; }
 
-    }
-
-    public class StudentIndexViewModel
-    {
-        public string NaamFilter { get; set; }
-        public char GeslachtIdFilter { get; set; }
-        public List<Student> FilteredStudent { get; set; }
-        public SelectList GenderToSelect { get; set; }
     }
 }

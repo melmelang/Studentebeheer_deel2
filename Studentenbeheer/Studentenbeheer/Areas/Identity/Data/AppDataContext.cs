@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Studentenbeheer.Areas.Identity.Data;
-using Studentenbeheer.Models;
 
 namespace Studentenbeheer.Data;
 
@@ -17,7 +15,11 @@ public class AppDataContext : IdentityDbContext<AppUser>
 
     public DbSet<Studentenbeheer.Models.Gender> Gender { get; set; }
 
+    public DbSet<Studentenbeheer.Models.Docent> Docent { get; set; }
+
     public DbSet<Studentenbeheer.Models.Module> Module { get; set; }
+
+    public DbSet<Studentenbeheer.Models.DocentModule> DocentModule { get; set; }
 
     public DbSet<Studentenbeheer.Models.Inschrijvingen> Inschrijvingen { get; set; }
 
