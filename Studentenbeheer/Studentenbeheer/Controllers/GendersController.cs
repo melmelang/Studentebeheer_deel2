@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Studentenbeheer.Data;
 using Studentenbeheer.Models;
 
 namespace Studentenbeheer.Controllers
 {
+    [Authorize(Roles = "Beheerder")]
     public class GendersController : AppController
     {
 

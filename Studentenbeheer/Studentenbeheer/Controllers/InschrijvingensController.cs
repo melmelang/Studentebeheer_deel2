@@ -7,7 +7,7 @@ using Studentenbeheer.Models;
 
 namespace Studentenbeheer.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Student,Beheerder,Docent")]
     public class InschrijvingensController : AppController
     {
 

@@ -59,24 +59,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/angeli melvin/Documents/GitHub/Studentebeheer_deel2/Studentenbeheer/Studentenbeheer/Views/Docents/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jZW50c1xDcmVhdGUuY3NodG1s
+[C:/Users/angeli melvin/Documents/GitHub/Studentebeheer_deel2/Studentenbeheer/Studentenbeheer/Views/AccountManager/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudE1hbmFnZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/angeli melvin/Documents/GitHub/Studentebeheer_deel2/Studentenbeheer/Studentenbeheer/Views/Docents/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jZW50c1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/angeli melvin/Documents/GitHub/Studentebeheer_deel2/Studentenbeheer/Studentenbeheer/Views/Docents/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jZW50c1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/angeli melvin/Documents/GitHub/Studentebeheer_deel2/Studentenbeheer/Studentenbeheer/Views/Docents/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jZW50c1xFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/angeli melvin/Documents/GitHub/Studentebeheer_deel2/Studentenbeheer/Studentenbeheer/Views/Docents/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jZW50c1xJbmRleC5jc2h0bWw=
+[C:/Users/angeli melvin/Documents/GitHub/Studentebeheer_deel2/Studentenbeheer/Studentenbeheer/Views/AccountManager/Roles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudE1hbmFnZXJcUm9sZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/angeli melvin/Documents/GitHub/Studentebeheer_deel2/Studentenbeheer/Studentenbeheer/Views/Home/Index.cshtml]

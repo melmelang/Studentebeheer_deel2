@@ -6,7 +6,7 @@ using Studentenbeheer.Models;
 
 namespace Studentenbeheer.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Student,Beheerder,Docent")]
     public class ModulesController : AppController
     {
 
@@ -40,14 +40,14 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
-        [Authorize(Roles = "Beheerder")]
+        [Authorize(Roles = "Beheerder,Docent")]
         // GET: Modules/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        [Authorize(Roles = "Beheerder")]
+        [Authorize(Roles = "Beheerder,Docent")]
         // POST: Modules/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -64,7 +64,7 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
-        [Authorize(Roles = "Beheerder")]
+        [Authorize(Roles = "Beheerder,Docent")]
         // GET: Modules/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,7 +81,7 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
-        [Authorize(Roles = "Beheerder")]
+        [Authorize(Roles = "Beheerder,Docent")]
         // POST: Modules/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -117,7 +117,7 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
-        [Authorize(Roles = "Beheerder")]
+        [Authorize(Roles = "Beheerder,Docent")]
         // GET: Modules/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -136,7 +136,7 @@ namespace Studentenbeheer.Controllers
             return View(@module);
         }
 
-        [Authorize(Roles = "Beheerder")]
+        [Authorize(Roles = "Beheerder,Docent")]
         // POST: Modules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -241,6 +241,32 @@ namespace Studentenbeheer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DocentModule",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ModuleId = table.Column<int>(type: "int", nullable: false),
+                    DocentId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DocentModule", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DocentModule_Docent_DocentId",
+                        column: x => x.DocentId,
+                        principalTable: "Docent",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DocentModule_Module_ModuleId",
+                        column: x => x.ModuleId,
+                        principalTable: "Module",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Inschrijvingen",
                 columns: table => new
                 {
@@ -319,6 +345,16 @@ namespace Studentenbeheer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DocentModule_DocentId",
+                table: "DocentModule",
+                column: "DocentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DocentModule_ModuleId",
+                table: "DocentModule",
+                column: "ModuleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Inschrijvingen_ModuleId",
                 table: "Inschrijvingen",
                 column: "ModuleId");
@@ -357,13 +393,16 @@ namespace Studentenbeheer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Docent");
+                name: "DocentModule");
 
             migrationBuilder.DropTable(
                 name: "Inschrijvingen");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Docent");
 
             migrationBuilder.DropTable(
                 name: "Module");

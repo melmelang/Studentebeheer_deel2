@@ -13,6 +13,9 @@ builder.Services.AddDefaultIdentity<AppUser>((IdentityOptions options) => option
 .AddEntityFrameworkStores<AppDataContext>();
 builder.Services.AddDbContext<AppDataContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddMvc()
+       .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+       .AddDataAnnotationsLocalization();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
@@ -79,6 +82,12 @@ using (var scope = app.Services.CreateScope())
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     DatabaseSeeder.Initialize(services, userManager);
 }
+
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture("nl-BE");
+//.AddSupportedCultures(Language.SupportedLanguages)
+//.AddSupportedUICultures(Language.SupportedLanguages);
+
+app.UseRequestLocalization(localizationOptions);
 
 app.MapRazorPages();
 app.UseMiddleware<SessionUser>();
