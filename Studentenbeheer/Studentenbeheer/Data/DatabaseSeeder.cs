@@ -61,11 +61,11 @@ namespace Studentenbeheer.Data
                         Email = "Angeli.melvin@hotmail.com",
                         EmailConfirmed = true,
                     };
-                    userManager.CreateAsync(user, "V@c@nc3s");
-                    userManager.CreateAsync(user2, "V@c@nc3s");
-                    userManager.CreateAsync(user3, "V@c@nc3s");
-                    userManager.CreateAsync(user4, "V@c@nc3s");
-                    userManager.CreateAsync(user5, "V@c@nc3s");
+                    userManager.CreateAsync(user, "Student+1");
+                    userManager.CreateAsync(user2, "Student+1");
+                    userManager.CreateAsync(user3, "Student+1");
+                    userManager.CreateAsync(user4, "Student+1");
+                    userManager.CreateAsync(user5, "Student+1");
 
                     context.Roles.AddRange(
                         new IdentityRole { Id = "Beheerder", Name = "Beheerder", NormalizedName = "beheerder" },

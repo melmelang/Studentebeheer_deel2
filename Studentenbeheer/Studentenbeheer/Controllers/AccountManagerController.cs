@@ -26,7 +26,7 @@ namespace Studentenbeheer.Controllers
                 .Where(u => (userName == "" || u.UserName.Contains(userName))
                          && (name == "" || (u.Voornaam.Contains(name) || u.Achternaam.Contains(name)))
                          && (email == "" || u.Email.Contains(email)))
-                .OrderBy(u => u.Voornaam + " " + u.Voornaam)
+                .OrderBy(u => u.Voornaam + " " + u.Achternaam)
                 .ToList();
             List<AppUserViewModel> userViewModels = new List<AppUserViewModel>();
             foreach (var user in users)
