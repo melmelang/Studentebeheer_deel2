@@ -29,6 +29,8 @@ namespace Studentenbeheer.Data
                         Email = "Angeli.melvin@hotmail.com",
                         EmailConfirmed = true,
                     };
+                    userManager.CreateAsync(user, "Student+1");
+                    Thread.Sleep(3000);
                     user2 = new AppUser
                     {
                         Voornaam = "Antoine",
@@ -37,6 +39,8 @@ namespace Studentenbeheer.Data
                         Email = "Angeli.melvin@hotmail.com",
                         EmailConfirmed = true,
                     };
+                    userManager.CreateAsync(user2, "Student+1");
+                    Thread.Sleep(3000);
                     user3 = new AppUser
                     {
                         Voornaam = "Ine",
@@ -45,6 +49,8 @@ namespace Studentenbeheer.Data
                         Email = "Angeli.melvin@hotmail.com",
                         EmailConfirmed = true,
                     };
+                    userManager.CreateAsync(user3, "Student+1");
+                    Thread.Sleep(3000);
                     user4 = new AppUser
                     {
                         Voornaam = "Tilly",
@@ -53,6 +59,8 @@ namespace Studentenbeheer.Data
                         Email = "Angeli.melvin@hotmail.com",
                         EmailConfirmed = true,
                     };
+                    userManager.CreateAsync(user4, "Student+1");
+                    Thread.Sleep(3000);
                     user5 = new AppUser
                     {
                         Voornaam = "Brian",
@@ -61,11 +69,8 @@ namespace Studentenbeheer.Data
                         Email = "Angeli.melvin@hotmail.com",
                         EmailConfirmed = true,
                     };
-                    userManager.CreateAsync(user, "Student+1");
-                    userManager.CreateAsync(user2, "Student+1");
-                    userManager.CreateAsync(user3, "Student+1");
-                    userManager.CreateAsync(user4, "Student+1");
                     userManager.CreateAsync(user5, "Student+1");
+                    Thread.Sleep(3000);
 
                     context.Roles.AddRange(
                         new IdentityRole { Id = "Beheerder", Name = "Beheerder", NormalizedName = "beheerder" },
